@@ -58,6 +58,7 @@ android {
 }
 var moshiVersion = "1.10.0"
 val nav_version = "2.7.7"
+val room_version = "2.6.1"
 dependencies {
 
 
@@ -113,6 +114,12 @@ dependencies {
 
     //Navigation
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    //Room
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
 
     //Coroutines
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")

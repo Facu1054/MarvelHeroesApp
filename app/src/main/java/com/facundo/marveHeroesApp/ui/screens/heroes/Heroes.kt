@@ -42,24 +42,27 @@ import com.facundo.marveHeroesApp.domain.model.Routes
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @Composable
 fun HeroesScreen(heroesViewModel: HeroesViewModel, navigationController: NavHostController){
-    val flowTest by heroesViewModel.marvelValue.collectAsStateWithLifecycle()
+    //val flowTest by heroesViewModel.marvelValue.collectAsStateWithLifecycle()
+    val flowTest by heroesViewModel.marvelValue2.collectAsStateWithLifecycle()
 
     var state by remember {
-        heroesViewModel.getAllCharactersData(0)
+        //heroesViewModel.getAllCharactersData(0)
+        heroesViewModel.onCreate()
         mutableStateOf(false)
     }
 
-    Heroes(heroesData = flowTest, navigationController = navigationController)
+    Heroes(heroesData = flowTest, navigationController = navigationController,heroesViewModel)
 }
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @Composable
-fun Heroes(heroesData: MarvelListState, navigationController: NavHostController){
+fun Heroes(heroesData: MutableList<Character>, navigationController: NavHostController,heroesViewModel: HeroesViewModel){
     //val flowTransaction by myComics.marvel.collectAsStateWithLifecycle()
 
 
     //LazyVerticalStaggeredGrid(columns =StaggeredGridCells.Fixed(2),modifier = Modifier.fillMaxSize()) {
-    if (heroesData.isLoading) {
+    //if (heroesData.isLoading) {
+    if (heroesViewModel.loading.value) {
         CircularProgressIndicator(
             modifier = Modifier.width(64.dp),
             color = MaterialTheme.colorScheme.secondary,
@@ -70,8 +73,8 @@ fun Heroes(heroesData: MarvelListState, navigationController: NavHostController)
             columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxSize(),
             content = {
-                items(heroesData.characterList) { item ->
-                    Log.i("Test", (item.thumbnail + "." + item.thumbnailExt).toString())
+                items(heroesData) { item ->
+                    Log.i("Test", (item.thumbnail).toString())
                     /*AsyncImage(
                         model = ImageRequest.Builder(LocalContext.current)
                             .data(item.thumbnail+"."+item.thumbnailExt)
@@ -116,7 +119,7 @@ fun ItemHeroe(character: Character, detailHero: NavHostController){
                         character.thumbnail.replace(
                             "http",
                             "https"
-                        ) + "." + character.thumbnailExt
+                        )
                     )
                     .crossfade(true)
                     .build(),

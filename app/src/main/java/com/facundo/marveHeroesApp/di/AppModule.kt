@@ -1,5 +1,5 @@
 package com.facundo.marveHeroesApp.di
-
+/*
 import com.facundo.marveHeroesApp.data.repository.MarvelRepositoryImpl
 import com.facundo.marveHeroesApp.domain.repository.MarvelRepository
 import com.superheroapp.data.network.ComicsApiClient
@@ -31,4 +31,4 @@ object AppModule {
     fun provideMarvelRepository(api: ComicsApiClient): MarvelRepository {
         return MarvelRepositoryImpl(api)
     }
-}
+}*/

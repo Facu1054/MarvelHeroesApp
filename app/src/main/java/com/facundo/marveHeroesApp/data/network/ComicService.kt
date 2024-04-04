@@ -1,6 +1,6 @@
 package com.facundo.marveHeroesApp.data.network
 
-/*
+
 
 import com.facundo.marveHeroesApp.data.model.heroes.HeroesDTO
 import com.facundo.marveHeroesApp.data.model.heroes.Result
@@ -17,10 +17,9 @@ class ComicService @Inject constructor(
     suspend fun getMarvelCharacters(offset: Int): List<Result> {
         return withContext(Dispatchers.IO){
             val response = api.getAllCharacters2(offset = offset.toString())
-            response.body() ?: emptyList()
+            response.body()?.data?.results ?: emptyList()
         }
 
     }
 }
 
-*/

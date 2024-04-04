@@ -1,6 +1,6 @@
 package com.facundo.marveHeroesApp.di
 
-/*
+
 import com.superheroapp.data.network.ComicsApiClient
 import dagger.Module
 import dagger.Provides
@@ -31,4 +31,3 @@ object NetworkModule {
     }
 }
 
-*/

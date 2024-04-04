@@ -1,7 +1,7 @@
 package com.facundo.marveHeroesApp.domain
 
 
-
+/*
 import android.os.Build
 import androidx.annotation.RequiresExtension
 import com.facundo.marveHeroesApp.data.model.comics.MarvelComicsResult
@@ -32,7 +32,7 @@ class GetHeroUseCase @Inject constructor(
 
             }*/
             val list = repository.getAllCharacters(offset = offset).data.results.map {
-                it.toCharacters()
+                it.toCharacter()
             }
             CharactersProvider.characters = list
             emit(Response.Success<List<Character>>(list))
@@ -46,4 +46,4 @@ class GetHeroUseCase @Inject constructor(
     }
 
 
-}
+}*/

@@ -32,6 +32,6 @@ interface ComicsApiClient{
         @Query("apikey") apiKey: String = Constant.API_KEY,
         @Query("hash") hash: String = Constant.hash(),
         @Query("offset") offset: String,
-    ): Response<List<Result>>
+    ): Response<HeroesDTO>
 }
 

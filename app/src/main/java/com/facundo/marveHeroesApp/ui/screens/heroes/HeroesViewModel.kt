@@ -2,13 +2,15 @@ package com.facundo.marveHeroesApp.ui.screens.heroes
 
 import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.facundo.marveHeroesApp.data.model.comics.Characters
 import com.facundo.marveHeroesApp.data.model.comics.MarvelComicsResult
-import com.facundo.marveHeroesApp.domain.GetHeroUseCase
+//import com.facundo.marveHeroesApp.domain.GetHeroUseCase
+import com.facundo.marveHeroesApp.domain.GetHeroesUseCase
 import com.facundo.marveHeroesApp.domain.model.Character
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,11 +19,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.facundo.marveHeroesApp.util.Response.*
 import kotlinx.coroutines.flow.StateFlow
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
 @HiltViewModel
 class HeroesViewModel @Inject constructor(
-    private val heroesUseCase: GetHeroUseCase,
+    private val heroesUseCase: GetHeroesUseCase,
     //private val marvelHeroesUseCase: GetHeroesUseCase,
 
     ) : ViewModel(){
@@ -36,18 +40,23 @@ class HeroesViewModel @Inject constructor(
     /*init {
         getAllCharactersData(0)
     }*/
-    /*fun onCreate() {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun onCreate() {
+        loading.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            loading.value = true
-            val result = marvelHeroesUseCase(0)
+
+            val result = heroesUseCase(0)
 
             if (!result.isNullOrEmpty()) {
                 _marvelValue2.value = result.toMutableList() ?: mutableListOf()
+                Log.i("resultTest",result.toString())
                 loading.value = false
 
             }
         }
-    }*/
+
+
+    }
 
 
 
@@ -65,7 +74,7 @@ class HeroesViewModel @Inject constructor(
 
 
 
-    @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
+    /*@RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     fun getAllCharactersData(offset:Int) = viewModelScope.launch(Dispatchers.IO) {
         heroesUseCase(offset = offset).collect{
             when(it){
@@ -87,6 +96,6 @@ class HeroesViewModel @Inject constructor(
             }
         }
 
-    }
+    }*/
 
 }

@@ -15,12 +15,15 @@ data class Result(
     val thumbnail: Thumbnail,
     val urls: List<Url>
 ){
-    fun toCharacters() = Character(
+    fun toCharacter() = Character(
         id = id,
         name = name,
         description = description,
-        thumbnail = thumbnail.path,
-        thumbnailExt = thumbnail.extension,
-        comics = comics.items.map { it.name }
+        thumbnail = thumbnail.path+"." + thumbnail.extension,
+        //thumbnailExt = thumbnail.extension,
+        /*comics = comics.items.map { it.name },
+        series = series.items.map { it.name },
+        stories = stories.items.map { it.name },
+        events = events.items.map { it.name }*/
     )
 }
